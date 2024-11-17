@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Airport_Transmission_System
-build_property.ProjectDir = C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Airport_Transmission_System\
+build_property.ProjectDir = D:\Advanced Software Quality\Flight-Data-Management-System\Airport_Transmission_System\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
