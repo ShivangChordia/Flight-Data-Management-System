@@ -1,2 +1,6 @@
+# Ignore folders
+bin/
+obj/
+Properties/
+config/
 .vs/
-/obj/
