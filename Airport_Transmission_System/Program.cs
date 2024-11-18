@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * Header comment
+ */
+
+using System;
 using System.Configuration;
 using System.IO;
 using System.Net.Sockets;
