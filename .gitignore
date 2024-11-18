@@ -1,1 +1,16 @@
+# Ignore Airport_Transmission_System folders
+/Airport_Transmission_System/bin/
+/Airport_Transmission_System/obj/
+/Airport_Transmission_System/.csproj/
+
+# Ignore Ground_Terminal_Management_System folders
+/Ground_Terminal_Management_System/bin/
+/Ground_Terminal_Management_System/obj/
+/Ground_Terminal_Management_System/Properties/
+
+#Ignore General files
+*/.csproj
+*/.sln
 .vs/
+*/app.config
+

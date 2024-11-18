@@ -1,0 +1,41 @@
+﻿@inject FdmsDbContext DbContext
+
+<h3>Real-Time Telemetry</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Timestamp</th>
+            <th>AccelX</th>
+            <th>AccelY</th>
+            <th>AccelZ</th>
+            <th>Altitude</th>
+            <th>Pitch</th>
+            <th>Bank</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var telemetry in telemetryData)
+        {
+            <tr>
+                <td>@telemetry.Timestamp</td>
+                <td>@telemetry.AccelX</td>
+                <td>@telemetry.AccelY</td>
+                <td>@telemetry.AccelZ</td>
+                <td>@telemetry.Altitude</td>
+                <td>@telemetry.Pitch</td>
+                <td>@telemetry.Bank</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<TelemetryData> telemetryData = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        telemetryData = await DbContext.TelemetryRecords.ToListAsync();
+    }
+
+    // no
+}
