@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Ground_Terminal_Management_System.props" />
-</Project>
