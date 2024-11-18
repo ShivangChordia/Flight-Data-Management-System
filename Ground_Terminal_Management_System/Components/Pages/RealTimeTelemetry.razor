@@ -1,41 +1,38 @@
-﻿@inject FdmsDbContext DbContext
+﻿@using Ground_Terminal_Management_System.Data
+@using Microsoft.EntityFrameworkCore
+@inject TelemetryContext DbContext
 
 <h3>Real-Time Telemetry</h3>
 <table class="table">
     <thead>
         <tr>
+            <th>Aircraft Tail Number</th>
             <th>Timestamp</th>
             <th>AccelX</th>
             <th>AccelY</th>
             <th>AccelZ</th>
-            <th>Altitude</th>
-            <th>Pitch</th>
-            <th>Bank</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var telemetry in telemetryData)
         {
             <tr>
+                <td>@telemetry.AircraftTailNumber</td>
                 <td>@telemetry.Timestamp</td>
                 <td>@telemetry.AccelX</td>
                 <td>@telemetry.AccelY</td>
                 <td>@telemetry.AccelZ</td>
-                <td>@telemetry.Altitude</td>
-                <td>@telemetry.Pitch</td>
-                <td>@telemetry.Bank</td>
             </tr>
         }
     </tbody>
 </table>
 
 @code {
-    private List<TelemetryData> telemetryData = new();
+    private List<TelemetryContext.GForceParameter> telemetryData = new();
 
     protected override async Task OnInitializedAsync()
     {
-        telemetryData = await DbContext.TelemetryRecords.ToListAsync();
+        // Fetch the telemetry data from the GForceParameters table
+        telemetryData = await DbContext.GForceParameters.ToListAsync();
     }
-
-    // no
 }
