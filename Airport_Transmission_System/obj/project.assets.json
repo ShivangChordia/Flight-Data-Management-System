@@ -170,19 +170,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shiva\\.nuget\\packages\\": {}
+    "C:\\Users\\urvis\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Advanced Software Quality\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj",
+      "projectUniqueName": "C:\\SET_Assignments\\Level_5\\Adv Software Quality\\FDMS_Project\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj",
       "projectName": "Airport_Transmission_System",
-      "projectPath": "D:\\Advanced Software Quality\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj",
-      "packagesPath": "C:\\Users\\shiva\\.nuget\\packages\\",
-      "outputPath": "D:\\Advanced Software Quality\\Flight-Data-Management-System\\Airport_Transmission_System\\obj\\",
+      "projectPath": "C:\\SET_Assignments\\Level_5\\Adv Software Quality\\FDMS_Project\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj",
+      "packagesPath": "C:\\Users\\urvis\\.nuget\\packages\\",
+      "outputPath": "C:\\SET_Assignments\\Level_5\\Adv Software Quality\\FDMS_Project\\Flight-Data-Management-System\\Airport_Transmission_System\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\shiva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\urvis\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -234,7 +234,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
