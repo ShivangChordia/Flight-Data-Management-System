@@ -9,7 +9,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // Register the DbContext for TelemetryContext using the connection string from appsettings.json.
-builder.Services.AddDbContext<TelemetryContext>(options =>
+builder.Services.AddDbContext<FdmsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FDMSDatabase")));
 
 // Build the application.

@@ -1,38 +1,54 @@
 ﻿@using Ground_Terminal_Management_System.Data
 @using Microsoft.EntityFrameworkCore
-@inject TelemetryContext DbContext
+@page "/realtime-telemetry"
+@inject FdmsDbContext DbContext
 
 <h3>Real-Time Telemetry</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Aircraft Tail Number</th>
-            <th>Timestamp</th>
-            <th>AccelX</th>
-            <th>AccelY</th>
-            <th>AccelZ</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var telemetry in telemetryData)
-        {
+
+@if (realTimeData is null)
+{
+    <p>Loading telemetry data...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@telemetry.AircraftTailNumber</td>
-                <td>@telemetry.Timestamp</td>
-                <td>@telemetry.AccelX</td>
-                <td>@telemetry.AccelY</td>
-                <td>@telemetry.AccelZ</td>
+                <th>Timestamp</th>
+                <th>AccelX</th>
+                <th>AccelY</th>
+                <th>AccelZ</th>
+                <th>Altitude</th>
+                <th>Pitch</th>
+                <th>Bank</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var telemetry in realTimeData)
+            {
+                <tr>
+                    <td>@telemetry.Timestamp</td>
+                    <td>@telemetry.AccelX</td>
+                    <td>@telemetry.AccelY</td>
+                    <td>@telemetry.AccelZ</td>
+                    <td>@telemetry.Altitude</td>
+                    <td>@telemetry.Pitch</td>
+                    <td>@telemetry.Bank</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
-    private List<TelemetryContext.GForceParameter> telemetryData = new();
+    private List<FdmsDbContext.TelemetryData> realTimeData;
 
     protected override async Task OnInitializedAsync()
     {
-        // Fetch the telemetry data from the GForceParameters table
-        telemetryData = await DbContext.GForceParameters.ToListAsync();
+        // Simulate loading real-time data (this can be replaced with real logic for real-time updates)
+        realTimeData = await DbContext.TelemetryRecords
+            .OrderByDescending(t => t.Timestamp)
+            .Take(50) // Limit to the most recent 50 records
+            .ToListAsync();
     }
 }
