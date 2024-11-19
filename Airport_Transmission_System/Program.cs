@@ -91,6 +91,7 @@ namespace AircraftTransmissionSystem
             string x = fields[1];
             string y = fields[2];
             string z = fields[3];
+            string weight = fields[4];
             string altitude = fields[5];
             string pitch = fields[6];
             string bank = fields[7];
@@ -99,7 +100,7 @@ namespace AircraftTransmissionSystem
             int checksum = CalculateChecksum(altitude, pitch, bank);
 
             // Construct the packet
-            string packet = $"{tailNumber}|{packetSequence}|{timestamp},{x},{y},{z},{altitude},{pitch},{bank}|{checksum}";
+            string packet = $"{tailNumber}|{packetSequence}|{timestamp},{x},{y},{z}, {weight}, {altitude},{pitch},{bank}|{checksum}";
             Console.WriteLine($"Formatted packet: {packet}");
             return packet;
         }

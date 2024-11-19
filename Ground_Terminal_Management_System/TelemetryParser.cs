@@ -13,18 +13,23 @@ namespace Ground_Terminal_Management_System
                 if (parts.Length != 4) throw new Exception("Invalid message format.");
 
                 var telemetryParts = parts[2].Split(',');
-                if (telemetryParts.Length != 7) throw new Exception("Invalid telemetry data format.");
+                if (telemetryParts.Length != 8) throw new Exception("Invalid telemetry data format.");
 
                 // Extract data
                 string tailNumber = parts[0];
+
                 int sequenceNumber = int.Parse(parts[1]);
+
+                // parts[2] -> telemetry parts
                 string timestamp = telemetryParts[0];
                 float x = float.Parse(telemetryParts[1]);
                 float y = float.Parse(telemetryParts[2]);
                 float z = float.Parse(telemetryParts[3]);
-                float altitude = float.Parse(telemetryParts[4]);
-                float pitch = float.Parse(telemetryParts[5]);
-                float bank = float.Parse(telemetryParts[6]);
+                float weight = float.Parse(telemetryParts[4]);
+                float altitude = float.Parse(telemetryParts[5]);
+                float pitch = float.Parse(telemetryParts[6]);
+                float bank = float.Parse(telemetryParts[7]);
+
                 int receivedChecksum = int.Parse(parts[3]);
 
                 // Calculate the checksum
@@ -47,6 +52,7 @@ namespace Ground_Terminal_Management_System
                     X = x,
                     Y = y,
                     Z = z,
+                    Weight = weight,
                     Altitude = altitude,
                     Pitch = pitch,
                     Bank = bank,

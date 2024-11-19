@@ -5502,19 +5502,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shiva\\.nuget\\packages\\": {}
+    "C:\\Users\\patel\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Advanced Software Quality\\Flight-Data-Management-System\\Ground_Terminal_Management_System\\Ground_Terminal_Management_System.csproj",
+      "projectUniqueName": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Ground_Terminal_Management_System\\Ground_Terminal_Management_System.csproj",
       "projectName": "Ground_Terminal_Management_System",
-      "projectPath": "D:\\Advanced Software Quality\\Flight-Data-Management-System\\Ground_Terminal_Management_System\\Ground_Terminal_Management_System.csproj",
-      "packagesPath": "C:\\Users\\shiva\\.nuget\\packages\\",
-      "outputPath": "D:\\Advanced Software Quality\\Flight-Data-Management-System\\Ground_Terminal_Management_System\\obj\\",
+      "projectPath": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Ground_Terminal_Management_System\\Ground_Terminal_Management_System.csproj",
+      "packagesPath": "C:\\Users\\patel\\.nuget\\packages\\",
+      "outputPath": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Ground_Terminal_Management_System\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\shiva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\patel\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5591,7 +5591,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
