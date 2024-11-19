@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Ground_Terminal_Management_System.Model;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -11,11 +12,12 @@ namespace Ground_Terminal_Management_System.Services
         private readonly int _port;
         private TcpListener? _listener;
         private CancellationTokenSource? _cancellationTokenSource;
+        private readonly DatabaseService _databaseService;              // Inject Database service via its constructor
 
-        public TcpMessageReaderService(int port)
+        public TcpMessageReaderService(int port, DatabaseService databaseService)
         {
             _port = port;
-
+            _databaseService = databaseService;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -62,6 +64,9 @@ namespace Ground_Terminal_Management_System.Services
             {
                 while (!cancellationToken.IsCancellationRequested)
                 {
+                    // Wait for 1 second before receivng the next packet
+                    await Task.Delay(1000, cancellationToken);
+
                     int bytesRead = await stream.ReadAsync(buffer.AsMemory(0, buffer.Length), cancellationToken);
 
                     if (bytesRead == 0)
@@ -81,8 +86,8 @@ namespace Ground_Terminal_Management_System.Services
                         continue;
                     }
 
-                    DatabaseService.StoreTelemetryData(telemetryData);
-
+                    // Process Telemetry data to separate G-Force data and Attitutde Parameter data
+                    ProcessTelemetryData(telemetryData);
                 }
             }
             catch (Exception ex)
@@ -93,6 +98,19 @@ namespace Ground_Terminal_Management_System.Services
             {
                 client.Close();
             }
+        }
+
+        private void ProcessTelemetryData(TelemetryDataModel telemetryData)
+        {
+                try
+                {
+                    _databaseService.StoreTelemetryData(telemetryData);         // Store in GForce Parameters Table
+                    Console.WriteLine("GForce Telemetry & Attitude Data successfully stored!");
+                }
+                catch (Exception ex) 
+                {
+                    Console.WriteLine($"Error Storing GForce & Attitude Data: {ex.Message}");
+                }
         }
     }
 }

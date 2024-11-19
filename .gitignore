@@ -7,11 +7,11 @@
 /Ground_Terminal_Management_System/bin/
 /Ground_Terminal_Management_System/obj/
 /Ground_Terminal_Management_System/Properties/
-/Ground_Terminal_Management_System/appsettings.json/
 
 #Ignore General files
 */.csproj
 */.sln
 .vs/
 */App.config
+*/appsettings.json
 

@@ -6,32 +6,38 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add SignalR
 builder.Services.AddSignalR();
 
-// Add service registrations
-
-builder.Services.AddSingleton(provider =>
+// Register TcpMessageReaderService and inject DatabaseService
+builder.Services.AddSingleton<TcpMessageReaderService>(provider =>
 {
-    int port = 5000; // Define your port
-    return new TcpMessageReaderService(port);
+    var databaseService = provider.GetRequiredService<DatabaseService>();
+    return new TcpMessageReaderService(5000, databaseService); // Inject it into TcpMessageReaderService
 });
 
 // Register Razor Components and enable interactive server components.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-
 // Register a hosted service to run TcpMessageReaderService in the background.
 builder.Services.AddHostedService<TcpMessageReaderBackgroundService>();
 
+// Register DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer("Server=localhost;Database=DataVisualization;User Id=sa;Password=17039125Ss#;Encrypt=True;TrustServerCertificate=True;"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Register DatabaseService and initialize it with IConfiguration
+builder.Services.AddSingleton(provider =>
+{
+    var configuration = builder.Configuration; // Access IConfiguration
+    DatabaseService.Initialize(configuration);  // Initialize DatabaseService with configuration
+    return DatabaseService.Instance; // Return the singleton instance
+});
 
 // Build the application.
 var app = builder.Build();
@@ -41,7 +47,7 @@ app.UseRouting();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
 
