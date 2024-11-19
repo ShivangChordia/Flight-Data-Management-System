@@ -1,0 +1,59 @@
+﻿@page "/telemetry"
+@using Ground_Terminal_Management_System.Model
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+@code {
+    private HubConnection? _hubConnection;
+    private TelemetryDataModel? _telemetryData;
+
+    // This method will run when the component is initialized
+    protected override async Task OnInitializedAsync()
+    {
+        // Set up SignalR connection
+        _hubConnection = new HubConnectionBuilder()
+            .WithUrl(NavigationManager.ToAbsoluteUri("/telemetryHub"))
+            .Build();
+
+        // Blazor client
+        _hubConnection.On<TelemetryDataModel>("ReceiveTelemetryData", (data) =>
+        {
+            _telemetryData = data;
+            Console.WriteLine($"Received telemetry data: Tail Number = {data.TailNumber}, Altitude = {data.Altitude}");
+            StateHasChanged();  // Trigger re-render of component
+        });
+
+        // Start the SignalR connection
+        try
+        {
+            await _hubConnection.StartAsync();
+            Console.WriteLine("SignalR connection started.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error starting SignalR connection: {ex.Message}");
+        }
+    }
+
+    // Clean up when the component is disposed
+    public async ValueTask DisposeAsync()
+    {
+        if (_hubConnection is not null)
+        {
+            await _hubConnection.DisposeAsync();
+        }
+    }
+}
+
+<div>
+    @if (_telemetryData != null)
+    {
+        <p>Tail Number: @_telemetryData.TailNumber</p>
+        <p>Altitude: @_telemetryData.Altitude</p>
+    }
+    else
+    {
+        <p>No telemetry data received yet.</p>
+    }
+</div>
