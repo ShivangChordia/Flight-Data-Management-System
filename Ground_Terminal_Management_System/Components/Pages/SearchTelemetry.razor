@@ -1,48 +1,79 @@
-﻿@using Ground_Terminal_Management_System.Data
+﻿@page "/search-telemetry"
+@using Ground_Terminal_Management_System.Model
 @using Microsoft.EntityFrameworkCore
-@page "/search-telemetry"
-@inject FdmsDbContext DbContext
+@inject ApplicationDbContext DbContext
+@rendermode InteractiveServer
 
-<h3>Search Telemetry</h3>
-<input @bind="searchQuery" placeholder="Enter Tail Number..." />
-<button @onclick="TelemetrySearch">Search</button>
+<h3>Search Telemetry Data</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Timestamp</th>
-            <th>AccelX</th>
-            <th>AccelY</th>
-            <th>AccelZ</th>
-            <th>Altitude</th>
-            <th>Pitch</th>
-            <th>Bank</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var telemetry in searchResults)
-        {
+<div>
+    <label for="tailNumber">Airplane Tail Number:</label>
+    <input type="text" id="tailNumber" @bind="tailNumber" class="form-control" />
+
+</div>
+<button class="btn btn-primary mt-2" @onclick="OnButtonClick">Test Button</button>
+<button class="btn btn-primary mt-2" @onclick=SearchTelemetryData>Search</button>
+
+@if (telemetryDataList != null && telemetryDataList.Any())
+{
+    <h4>Results:</h4>
+    <table class="table">
+        <thead>
             <tr>
-                <td>@telemetry.Timestamp</td>
-                <td>@telemetry.AccelX</td>
-                <td>@telemetry.AccelY</td>
-                <td>@telemetry.AccelZ</td>
-                <td>@telemetry.Altitude</td>
-                <td>@telemetry.Pitch</td>
-                <td>@telemetry.Bank</td>
+                <th>Tail Number</th>
+                <th>Sequence Number</th>
+                <th>Timestamp</th>
+                <th>Altitude</th>
+                <th>Pitch</th>
+                <th>Bank</th
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var data in telemetryDataList)
+            {
+                <tr>
+                    <td>@data.TailNumber</td>
+                    <td>@data.SequenceNumber</td>
+                    <td>@data.Timestamp</td>
+                    <td>@data.Altitude</td>
+                    <td>@data.Pitch</td>
+                    <td>@data.Bank</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found.</p>
+}
 
 @code {
-    private string searchQuery = string.Empty;
-    private List<FdmsDbContext.TelemetryData> searchResults = new();
-
-    private async Task TelemetrySearch()
+    private string tailNumber = string.Empty;
+    private List<TelemetryDataModel> telemetryDataList;
+    private void SearchTelemetryData()
     {
-        searchResults = await DbContext.TelemetryRecords
-            .Where(t => t.AircraftTailNumber.Contains(searchQuery))
-            .ToListAsync();
+
+
+        Console.WriteLine("Search button clicked!");
+
+        IQueryable<TelemetryDataModel> query = DbContext.TelemetryDatas.AsQueryable();
+
+        if (!string.IsNullOrEmpty(tailNumber))
+        {
+            query = query.Where(t => t.TailNumber.Contains(tailNumber));
+        }
+
+        telemetryDataList = query.ToList();
+
+        Console.WriteLine($"Found {telemetryDataList.Count} results.");
+
+        // Explicitly trigger UI update
+        StateHasChanged();
+    }
+
+      private void OnButtonClick()
+    {
+        Console.WriteLine("Button clicked!");
     }
 }
