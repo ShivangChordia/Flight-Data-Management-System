@@ -1,12 +1,19 @@
 using Ground_Terminal_Management_System.Components;
 using Ground_Terminal_Management_System.Data;
+using Ground_Terminal_Management_System.Services;
 using Microsoft.EntityFrameworkCore;
+
+
+var tcpReader = new TcpMessageReaderService(5000);
+tcpReader.Start();
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Register Razor Components and enable interactive server components.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+
 
 // Register the DbContext for TelemetryContext using the connection string from appsettings.json.
 builder.Services.AddDbContext<FdmsDbContext>(options =>

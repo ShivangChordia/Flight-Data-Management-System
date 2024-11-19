@@ -13,5 +13,5 @@
 */.csproj
 */.sln
 .vs/
-*/app.config
+*/App.config
 
