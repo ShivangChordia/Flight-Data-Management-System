@@ -22,15 +22,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-
 // Register DatabaseService and initialize it with IConfiguration
 builder.Services.AddSingleton(provider =>
 {
     var configuration = builder.Configuration; // Access IConfiguration
     DatabaseService.Initialize(configuration);  // Initialize DatabaseService with configuration
-    return DatabaseService.Instance; // Return the singleton instance
+
+    // Ensure DatabaseService is not nullable when used
+    return DatabaseService.Instance ?? throw new InvalidOperationException("DatabaseService instance is not initialized.");
 });
+
+
 builder.Services.AddSingleton<TcpMessageReaderService>(provider =>
 {
     var databaseService = provider.GetRequiredService<DatabaseService>();
@@ -38,9 +40,9 @@ builder.Services.AddSingleton<TcpMessageReaderService>(provider =>
 
     return new TcpMessageReaderService(5000, databaseService, hubContext);
 });
+
 // Register a hosted service to run TcpMessageReaderService in the background.
 builder.Services.AddHostedService<TcpMessageReaderBackgroundService>();
-
 
 var app = builder.Build();
 

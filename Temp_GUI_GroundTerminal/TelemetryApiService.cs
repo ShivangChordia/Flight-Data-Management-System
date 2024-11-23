@@ -1,5 +1,13 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
+﻿/*
+* FILE : TelemetryApiService.cs
+* PROJECT : SENG3020 - Milestone #2 
+* PROGRAMMER : Shivang Chordia, Keval PAtel, Urvish Motivaras & Jaygiri Goswami
+* DATE : 2024-11-22
+* DESCRIPTION : The TelemetryApiService class is a service designed to interact with a web API endpoint that provides telemetry data.
+*/
+
+
+using System.Net.Http;
 using Newtonsoft.Json;
 
 namespace Temp_GUI_GroundTerminal
@@ -17,7 +25,12 @@ namespace Temp_GUI_GroundTerminal
             };
         }
 
-        // Method to fetch telemetry data based on a search term
+        /*
+        * FUNCTION: SearchTelemetryAsync()
+        * DESCRIPTION:  Method to fetch telemetry data based on a search term
+        * PARAMETERS: string searchTerm ->  used to query the telemetry data
+        * RETURN: Task (Asynchronous)
+        */
         public async Task<List<TelemetryDataModel>> SearchTelemetryAsync(string searchTerm)
         {
             var response = await _httpClient.GetAsync($"https://localhost:7224/api/telemetryController/search?query={searchTerm}");

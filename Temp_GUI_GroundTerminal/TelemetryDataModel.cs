@@ -1,4 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/*
+* FILE : TelemetryDataModel.cs
+* PROJECT : SENG3020 - Milestone #2 
+* PROGRAMMER : Shivang Chordia, Keval PAtel, Urvish Motivaras & Jaygiri Goswami
+* DATE : 2024-11-22
+* DESCRIPTION : The TelemetryDataModel class defines the structure for telemetry data used in the Temp_GUI_GroundTerminal application.
+*/
+
+using System.ComponentModel.DataAnnotations;
 
 namespace Temp_GUI_GroundTerminal
 {

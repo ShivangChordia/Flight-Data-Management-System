@@ -61,7 +61,9 @@ namespace AircraftTransmissionSystem
          * FUNCTION: ProcessTelemetryFile
          * DESCRIPTION: The ProcessTelemetryFile function reads a telemetry file line by line, formats each line into a packet with a sequence number, and transmits it to a server.
                         It introduces a 1-second delay between transmissions to simulate real-time data flow.
-         * PARAMETERS: string filePath, string serverIP, int serverPort
+         * PARAMETERS: string filePath -> Path to the telemtry files to get them processed, 
+         *             string serverIP -> IP address of the server to which the packets should be transmitted , 
+         *             int serverPort -> Port Number of the server to which the packets should be transmitted
          * RETURN: void
          */
         static void ProcessTelemetryFile(string filePath, string serverIP, int serverPort)
@@ -101,7 +103,9 @@ namespace AircraftTransmissionSystem
          * FUNCTION: FormatPacket
          * DESCRIPTION: The FormatPacket function formats telemetry data into a structured packet. It extracts the aircraft tail number from the file name, parses the telemetry fields, validates 
                         their format, calculates a checksum using altitude, pitch, and bank values, and constructs a packet string with sequence number and telemetry details.
-         * PARAMETERS: string filePath, int packetSequence, string telemetryData
+         * PARAMETERS: string filePath -> Path to the telemtry files to get them processed,
+         *             int packetSequence -> The sequence number of the packet to ensure the order of packets., 
+         *             string telemetryData -> A string containing the telemetry data in CSV format
          * RETURN: void
          */
         static string FormatPacket(string filePath, int packetSequence, string telemetryData)
@@ -137,7 +141,9 @@ namespace AircraftTransmissionSystem
         /*
          * FUNCTION: FormatPacket
          * DESCRIPTION: The CalculateChecksum function computes a checksum by parsing the altitude, pitch, and bank values as floats, averaging them, and truncating the result to an integer.
-         * PARAMETERS: string altitude, string pitch, string bank
+         * PARAMETERS: string altitude ->  The altitude value retrieved from the file as a string,
+         *             string pitch  ->  The pitch value retrieved from the file as a string, 
+         *             string bank  ->  The bank value retrieved from the file as a string
          * RETURN: int - Returns the checksum, if an error occurs it returns null instead
          */
         static int CalculateChecksum(string altitude, string pitch, string bank)
@@ -169,7 +175,9 @@ namespace AircraftTransmissionSystem
          * FUNCTION: TransmitPacket
          * DESCRIPTION: The TransmitPacket function sends a formatted packet to a server using TCP. It establishes a connection to the specified server IP and port, converts the packet to a byte 
                         array, and writes it to the network stream. If any errors occur during transmission, they are logged.
-         * PARAMETERS: string packet, string serverIP, int serverPort
+         * PARAMETERS:string packet -> Packetized data retrieved from the files to get it transmitted, 
+         *             string serverIP -> IP address of the server to which the packets should be transmitted , 
+         *             int serverPort -> Port Number of the server to which the packets should be transmitted
          * RETURN: void
          */
         static void TransmitPacket(string packet, string serverIP, int serverPort)

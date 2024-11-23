@@ -1,10 +1,16 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
-using Newtonsoft.Json;
+﻿/*
+* FILE : MainWindow.xaml.cs
+* PROJECT : SENG3020 - Milestone #2 
+* PROGRAMMER : Shivang Chordia, Keval PAtel, Urvish Motivaras & Jaygiri Goswami
+* DATE : 2024-11-22
+* DESCRIPTION : The MainWindow class in this WPF application acts as the primary interface for managing telemetry data. It uses SignalR for real-time data streaming, an API service for data 
+*               retrieval, and ObservableCollection to keep the data in sync with the UI.
+*/
+
+
+using Microsoft.AspNetCore.SignalR.Client;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace Temp_GUI_GroundTerminal
@@ -27,6 +33,12 @@ namespace Temp_GUI_GroundTerminal
             InitializeSignalRConnection();
         }
 
+        /*
+         * FUNCTION: InitializeSignalRConnection()
+         * DESCRIPTION:The InitializeSignalRConnection method is an asynchronous method that sets up and manages a SignalR connection to a telemetry hub and handles the reception of telemetry data.
+         * PARAMETERS: none
+         * RETURN: void
+         */
         private async void InitializeSignalRConnection()
         {
             // Initialize the HubConnection
@@ -73,6 +85,13 @@ namespace Temp_GUI_GroundTerminal
             }
         }
 
+        /*
+         * FUNCTION: SearchButton_Click()
+         * DESCRIPTION:The SearchButton_Click method is an event handler for the Search button click event in the WPF UI. It is responsible for handling the user's search input. It validates
+                       the input, calls an asynchronous API to fetch telemetry data based on the search term, and then binds the results to a DataGrid in the UI.
+         * PARAMETERS: object sender, RoutedEventArgs e
+         * RETURN: void
+         */
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             string searchTerm = searchTextBox.Text; // Get search term from TextBox
@@ -97,6 +116,13 @@ namespace Temp_GUI_GroundTerminal
         }
 
 
+        /*
+         * FUNCTION: LogButton_Click()
+         * DESCRIPTION: The LogButton_Click method allows the user to log search results into a text file. It retrieves the search term, defines a dynamic log file path, and writes the telemetry 
+         *              data to the file in a formatted manner.
+         * PARAMETERS: object sender, RoutedEventArgs e
+         * RETURN: void
+         */
         private void LogButton_Click(object sender, RoutedEventArgs e)
         {
             string searchQuery = searchTextBox.Text;
@@ -120,6 +146,12 @@ namespace Temp_GUI_GroundTerminal
             }
         }
 
+        /*
+         * FUNCTION: Window_Closed()
+         * DESCRIPTION: This method is responsible for handling the termination of the SignalR connection when the application window is closed.
+         * PARAMETERS: object sender, RoutedEventArgs e
+         * RETURN: void
+         */
         private void Window_Closed(object sender, EventArgs e)
         {
             // Close the connection when the window is closed
@@ -128,8 +160,6 @@ namespace Temp_GUI_GroundTerminal
                 _connection.StopAsync().Wait();
             }
         }
-      
-
     }
 
 }

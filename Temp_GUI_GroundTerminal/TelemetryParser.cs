@@ -1,7 +1,23 @@
-﻿namespace Temp_GUI_GroundTerminal
+﻿/*
+* FILE : TelemetryDataModel.cs
+* PROJECT : SENG3020 - Milestone #2 
+* PROGRAMMER : Shivang Chordia, Keval PAtel, Urvish Motivaras & Jaygiri Goswami
+* DATE : 2024-11-22
+* DESCRIPTION : The TelemetryDataModel class defines the structure for telemetry data used in the Temp_GUI_GroundTerminal application.
+*/
+
+
+namespace Temp_GUI_GroundTerminal
 {
     public static class TelemetryParser
     {
+        /*
+         * FUNCTION: Parse()
+         * DESCRIPTION: The Parse method, processes and validates telemetry data from a message in string format, then returns a TelemetryDataModel object if the data is valid.
+         * PARAMETERS: string message -> This is the raw telemetry message (as a string) received from the client. 
+         * RETURN: TelemetryDataModel -> If the checksum is valid, a TelemetryDataModel object is returned with the parse values otherwise if an error occurs during parsing an 
+                   empty TelemetryDataModel is returned
+         */
         public static TelemetryDataModel Parse(string message)
         {
             try
@@ -64,6 +80,13 @@
             }
         }
 
+        /*
+        * FUNCTION: CalculateChecksum()
+        * DESCRIPTION: The CalculateChecksum method calculates a checksum based on three telemetry data values: altitude, pitch, and bank. This checksum is used for data validation to ensure the 
+                       integrity of the telemetry message.
+        * PARAMETERS: float altitude, float pitch, float bank
+        * RETURN: Int -> The method returns the calculated checksum as an integer.
+        */
         private static int CalculateChecksum(float altitude, float pitch, float bank)
         {
             try
