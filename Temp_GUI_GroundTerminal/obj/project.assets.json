@@ -1118,19 +1118,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shiva\\.nuget\\packages\\": {}
+    "C:\\Users\\patel\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Advanced Software Quality\\Flight_DMS\\Temp_GUI_GroundTerminal\\Temp_GUI_GroundTerminal.csproj",
+      "projectUniqueName": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Temp_GUI_GroundTerminal\\Temp_GUI_GroundTerminal.csproj",
       "projectName": "Temp_GUI_GroundTerminal",
-      "projectPath": "D:\\Advanced Software Quality\\Flight_DMS\\Temp_GUI_GroundTerminal\\Temp_GUI_GroundTerminal.csproj",
-      "packagesPath": "C:\\Users\\shiva\\.nuget\\packages\\",
-      "outputPath": "D:\\Advanced Software Quality\\Flight_DMS\\Temp_GUI_GroundTerminal\\obj\\",
+      "projectPath": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Temp_GUI_GroundTerminal\\Temp_GUI_GroundTerminal.csproj",
+      "packagesPath": "C:\\Users\\patel\\.nuget\\packages\\",
+      "outputPath": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Temp_GUI_GroundTerminal\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\shiva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\patel\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1193,7 +1193,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
