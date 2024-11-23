@@ -1,0 +1,63 @@
+﻿<Window x:Class="Temp_GUI_GroundTerminal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Temp_GUI_GroundTerminal"
+        mc:Ignorable="d"
+        Title="Ground Terminal - Telemetry" Height="600" Width="1000">
+
+    <Grid>
+        <TabControl>
+            <!-- Real-Time Mode Tab -->
+            <TabItem Header="Real-Time">
+                <Grid>
+                    
+
+                    <DataGrid x:Name="dataGridTelemetry" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10" Height="300" ItemsSource="{Binding TelemetryDataList}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <!-- Define your columns here -->
+                            <DataGridTextColumn Header="Tail Number" Binding="{Binding TailNumber}" Width="*"/>
+                            <DataGridTextColumn Header="Sequence Number" Binding="{Binding SequenceNumber}" Width="*"/>
+                            <DataGridTextColumn Header="Timestamp" Binding="{Binding Timestamp}" Width="*"/>
+                            <DataGridTextColumn Header="X" Binding="{Binding X}" Width="*"/>
+                            <DataGridTextColumn Header="Y" Binding="{Binding Y}" Width="*"/>
+                            <DataGridTextColumn Header="Z" Binding="{Binding Z}" Width="*"/>
+                            <DataGridTextColumn Header="Weight" Binding="{Binding Weight}" Width="*"/>
+                            <DataGridTextColumn Header="Altitude" Binding="{Binding Altitude}" Width="*"/>
+                            <DataGridTextColumn Header="Pitch" Binding="{Binding Pitch}" Width="*"/>
+                            <DataGridTextColumn Header="Bank" Binding="{Binding Bank}" Width="*"/>
+                            <DataGridTextColumn Header="Checksum" Binding="{Binding Checksum}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock x:Name="lblStatus" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0" FontSize="14" Padding="10" Text="Status: Connected"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Search Mode Tab -->
+            <TabItem Header="Search Telemetry">
+                <Grid>
+                    <TextBox x:Name="searchTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="20,20,0,0"/>
+                    <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="30" Margin="240,20,0,0" Click="SearchButton_Click"/>
+                    <DataGrid x:Name="searchDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,60,20,20" Height="300" ItemsSource="{Binding SearchResults}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <!-- Define your columns for search results -->
+                            <DataGridTextColumn Header="Tail Number" Binding="{Binding TailNumber}" Width="*"/>
+                            <DataGridTextColumn Header="Sequence Number" Binding="{Binding SequenceNumber}" Width="*"/>
+                            <DataGridTextColumn Header="Timestamp" Binding="{Binding Timestamp}" Width="*"/>
+                            <DataGridTextColumn Header="X" Binding="{Binding X}" Width="*"/>
+                            <DataGridTextColumn Header="Y" Binding="{Binding Y}" Width="*"/>
+                            <DataGridTextColumn Header="Z" Binding="{Binding Z}" Width="*"/>
+                            <DataGridTextColumn Header="Weight" Binding="{Binding Weight}" Width="*"/>
+                            <DataGridTextColumn Header="Altitude" Binding="{Binding Altitude}" Width="*"/>
+                            <DataGridTextColumn Header="Pitch" Binding="{Binding Pitch}" Width="*"/>
+                            <DataGridTextColumn Header="Bank" Binding="{Binding Bank}" Width="*"/>
+                            <DataGridTextColumn Header="Checksum" Binding="{Binding Checksum}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="logButton" Content="Log to File" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="100" Height="30" Margin="0,0,20,20" Click="LogButton_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GUI_Ground_Terminal.bundle.scp.css",
+      "PackagePath": "staticwebassets\\GUI_Ground_Terminal.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.GUI_Ground_Terminal.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.GUI_Ground_Terminal.props",
+      "PackagePath": "build\\GUI_Ground_Terminal.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.GUI_Ground_Terminal.props",
+      "PackagePath": "buildMultiTargeting\\GUI_Ground_Terminal.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.GUI_Ground_Terminal.props",
+      "PackagePath": "buildTransitive\\GUI_Ground_Terminal.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

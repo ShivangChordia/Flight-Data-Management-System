@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj": {}
+    "D:\\Advanced Software Quality\\Flight_Data_Management_System\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj": {}
   },
   "projects": {
-    "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj": {
+    "D:\\Advanced Software Quality\\Flight_Data_Management_System\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj",
+        "projectUniqueName": "D:\\Advanced Software Quality\\Flight_Data_Management_System\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj",
         "projectName": "Airport_Transmission_System",
-        "projectPath": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj",
-        "packagesPath": "C:\\Users\\patel\\.nuget\\packages\\",
-        "outputPath": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Airport_Transmission_System\\obj\\",
+        "projectPath": "D:\\Advanced Software Quality\\Flight_Data_Management_System\\Flight-Data-Management-System\\Airport_Transmission_System\\Airport_Transmission_System.csproj",
+        "packagesPath": "C:\\Users\\shiva\\.nuget\\packages\\",
+        "outputPath": "D:\\Advanced Software Quality\\Flight_Data_Management_System\\Flight-Data-Management-System\\Airport_Transmission_System\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\patel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\shiva\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -66,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

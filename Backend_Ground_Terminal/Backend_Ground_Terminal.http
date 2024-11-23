@@ -1,0 +1,6 @@
+@Backend_Ground_Terminal_HostAddress = http://localhost:5008
+
+GET {{Backend_Ground_Terminal_HostAddress}}//
+Accept: application/json
+
+###

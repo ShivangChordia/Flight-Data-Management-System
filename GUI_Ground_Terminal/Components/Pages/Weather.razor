@@ -1,0 +1,107 @@
+﻿@page "/telemetry"
+@using Microsoft.AspNetCore.SignalR.Client
+@rendermode InteractiveServer
+@inject HubConnection HubConnection
+
+<h3>Real-Time Telemetry Data</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tail Number</th>
+            <th>Sequence Number</th>
+            <th>X</th>
+            <th>Y</th>
+            <th>Z</th>
+            <th>Weight</th>
+            <th>Altitude</th>
+            <th>Pitch</th>
+            <th>Bank</th>
+            <th>Checksum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var data in telemetryDataList)
+        {
+            <tr>
+                <td>@data.TailNumber</td>
+                <td>@data.SequenceNumber</td>
+                <td>@data.X</td>
+                <td>@data.Y</td>
+                <td>@data.Z</td>
+                <td>@data.Weight</td>
+                <td>@data.Altitude</td>
+                <td>@data.Pitch</td>
+                <td>@data.Bank</td>
+                <td>@data.Checksum</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@code {
+    private List<TelemetryDataModel> telemetryDataList = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+        // Configure SignalR hub connection
+        HubConnection.On<string>("ReceiveTelemetry", async message =>
+        {
+        Console.WriteLine($"Received Raw Telemetry Message: {message}");
+
+        // Use the TelemetryParser to parse the message
+        var telemetryData = TelemetryParser.Parse(message);
+
+        if (telemetryData != null)
+        {
+            Console.WriteLine($"Parsed Telemetry Data: TailNumber={telemetryData.TailNumber}, SequenceNumber={telemetryData.SequenceNumber}");
+
+            telemetryDataList.Add(telemetryData);
+
+            // Limit to the most recent 100 entries
+            if (telemetryDataList.Count > 100)
+            {
+                telemetryDataList.RemoveAt(0);
+            }
+
+            // Ensure UI update happens on the main thread
+            await InvokeAsync(StateHasChanged);  // Invoking StateHasChanged on UI 
+            await Task.Delay(1000);
+
+                Console.WriteLine(telemetryDataList.Count);
+        }
+        else
+        {
+            Console.WriteLine("Failed to parse telemetry data.");
+        }
+        });
+
+
+        // Start the SignalR connection
+        if (HubConnection.State == HubConnectionState.Disconnected)
+        {
+            try
+            {
+                await HubConnection.StartAsync();
+                Console.WriteLine("Connected to SignalR hub.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error connecting to hub: {ex.Message}");
+            }
+        }
+
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (HubConnection.State == HubConnectionState.Connected)
+        {
+
+            await HubConnection.StopAsync();
+            Console.WriteLine($"Error connecting Dispose");
+        }
+    }
+}

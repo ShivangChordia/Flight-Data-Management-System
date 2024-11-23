@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "Ground_Terminal_Management_System.Controllers.TelemetryController",
+    "Method": "SearchTelemetryData",
+    "RelativePath": "api/telemetryController/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Backend_Ground_Terminal.Model.TelemetryDataModel, Backend_Ground_Terminal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]
