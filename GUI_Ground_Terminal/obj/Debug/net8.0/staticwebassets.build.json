@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NBqJ95XypzXy0t7I+U07undpeWT4k2ywtm65zinZOQ0=",
+  "Hash": "ACq3HOjAMCyNK/V8PitQlmYq/5ZuNMcl1BKie8oU5/4=",
   "Source": "GUI_Ground_Terminal",
   "BasePath": "_content/GUI_Ground_Terminal",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "GUI_Ground_Terminal\\wwwroot",
       "Source": "GUI_Ground_Terminal",
-      "ContentRoot": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\",
+      "ContentRoot": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\",
       "BasePath": "_content/GUI_Ground_Terminal",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\bundle\\GUI_Ground_Terminal.styles.css",
+      "Identity": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\bundle\\GUI_Ground_Terminal.styles.css",
       "SourceId": "GUI_Ground_Terminal",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/GUI_Ground_Terminal",
       "RelativePath": "GUI_Ground_Terminal.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\bundle\\GUI_Ground_Terminal.styles.css"
+      "OriginalItemSpec": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\bundle\\GUI_Ground_Terminal.styles.css"
     },
     {
-      "Identity": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GUI_Ground_Terminal.bundle.scp.css",
+      "Identity": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GUI_Ground_Terminal.bundle.scp.css",
       "SourceId": "GUI_Ground_Terminal",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/GUI_Ground_Terminal",
       "RelativePath": "GUI_Ground_Terminal.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GUI_Ground_Terminal.bundle.scp.css"
+      "OriginalItemSpec": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GUI_Ground_Terminal.bundle.scp.css"
     },
     {
-      "Identity": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\app.css",
+      "Identity": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\app.css",
       "SourceId": "GUI_Ground_Terminal",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\",
+      "ContentRoot": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\",
       "BasePath": "_content/GUI_Ground_Terminal",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "GUI_Ground_Terminal",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\",
+      "ContentRoot": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\",
       "BasePath": "_content/GUI_Ground_Terminal",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "GUI_Ground_Terminal",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\",
+      "ContentRoot": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\",
       "BasePath": "_content/GUI_Ground_Terminal",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\favicon.png",
+      "Identity": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\favicon.png",
       "SourceId": "GUI_Ground_Terminal",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\",
+      "ContentRoot": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\",
       "BasePath": "_content/GUI_Ground_Terminal",
       "RelativePath": "favicon.png",
       "AssetKind": "All",

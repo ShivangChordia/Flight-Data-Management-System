@@ -1,4 +1,13 @@
-﻿using System.Net.Sockets;
+﻿/*
+* FILE : TcpMessageReaderService.cs
+* PROJECT : SENG3020 - Milestone #2 
+* PROGRAMMER : Shivang Chordia, Keval PAtel, Urvish Motivaras & Jaygiri Goswami
+* DATE : 2024-11-22
+* DESCRIPTION : This file handles incoming telemetry data over a TCP connection, processes it, and integrates it with the database and real-time client interfaces.
+*/
+
+
+using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using Backend_Ground_Terminal.Model;
@@ -15,6 +24,14 @@ namespace Ground_Terminal_Management_System.Services
         private readonly DatabaseService _databaseService;
         private readonly IHubContext<TelemetryHub> _hubContext; // SignalR Hub Context
 
+        /*
+       * FUNCTION: TcpMessageReaderService()
+       * DESCRIPTION: Listens for incoming telemetry data over a TCP connection. Processes and stores the telemetry data in a database. Broadcasts the data in real-time to clients using SignalR.
+       * PARAMETERS: int port - TCP port to listen for incoming client connections
+       *             DatabaseService databaseService - Used to store the processed telemtry data.
+       *             IHubContext<TelemetryHub> hubContext - Provides the context to broadcast data to SignalR clients.
+       * RETURN: n/a
+       */
         public TcpMessageReaderService(int port, DatabaseService databaseService, IHubContext<TelemetryHub> hubContext)
         {
             _port = port;
@@ -22,6 +39,12 @@ namespace Ground_Terminal_Management_System.Services
             _hubContext = hubContext;
         }
 
+        /*
+         * FUNCTION: StartAsync()
+         * DESCRIPTION: Starts the TCP listener on the specified port and listens for client connections.
+         * PARAMETERS: CancellationToken cancellationToken -> This token allows the caller to cancel the execution of the StartAsync method. It is used to gracefully stop the listener when needed.
+         * RETURN: Task (Asynchronous Method)
+         */
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             Console.WriteLine($"Starting TCP Message Reader on port {_port}...");
@@ -51,11 +74,25 @@ namespace Ground_Terminal_Management_System.Services
             }
         }
 
+        /*
+        * FUNCTION: stop()
+        * DESCRIPTION: Stops the TCP message reader service by canceling ongoing tasks and closing the listener.
+        * PARAMETERS: none
+        * RETURN: void
+        */
         public void Stop()
         {
             _cancellationTokenSource?.Cancel();
         }
 
+        /*
+        * FUNCTION: HandleClientAsync()
+        * DESCRIPTION: Handles communication with a single client, reading messages and processing them.
+        * PARAMETERS: TcpClient client -> Represents the client connection that has been established over TCP. , 
+        *             CancellationToken cancellationToken -> This token is used to monitor for cancellation requests. It allows the method to respond to cancellation signals, such as when the server 
+        *             needs to stop processing or the operation is no longer needed. 
+        * RETURN: Task (Asynchronous Method) 
+        */
         private async Task HandleClientAsync(TcpClient client, CancellationToken cancellationToken)
         {
             Console.WriteLine("Client connected.");
@@ -87,7 +124,7 @@ namespace Ground_Terminal_Management_System.Services
                     }
 
                     // Process Telemetry data and forward it to Blazor page
-                    ProcessTelemetryDataAsync(telemetryData, message);
+                   await ProcessTelemetryDataAsync(telemetryData, message);
 
                     
                 }
@@ -102,6 +139,14 @@ namespace Ground_Terminal_Management_System.Services
             }
         }
 
+        /*
+        * FUNCTION: ProcessTelemetryDataAsync()
+        * DESCRIPTION: Processes the telemetry data by storing it in the database and broadcasting it to SignalR clients.
+        * PARAMETERS: TelemetryDataModel telemetryData ->  This is the model containing the parsed telemetry data (e.g., tail number, sequence number, altitude, pitch, bank, etc.) that was received 
+        *                                                  and parsed from the client message. 
+        *             String message ->  This is the raw telemetry message (as a string) received from the client. 
+        * RETURN: n/a
+        */
         private async Task ProcessTelemetryDataAsync(TelemetryDataModel telemetryData, String message)
         {
             try

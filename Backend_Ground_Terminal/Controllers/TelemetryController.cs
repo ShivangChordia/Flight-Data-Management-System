@@ -19,13 +19,25 @@ namespace Ground_Terminal_Management_System.Controllers
     {
         private readonly DatabaseService _databaseService;
 
-        // Constructor injection of DatabaseService
+        /*
+        * CONSTRUCTOR: TelemetryController()
+        * DESCRIPTION: Constructor injection of DatabaseService
+        * PARAMETERS: DatabaseService databaseService
+        * RETURN: n/a
+        */
         public TelemetryController(DatabaseService databaseService)
         {
             _databaseService = databaseService;
         }
 
-        // GET api/telemetryController/search?query={tailNumber}
+        /*
+        * FUNCTION: SearchTelemetryData()
+        * DESCRIPTION: The SearchTelemetryData function is an API endpoint that handles HTTP GET requests for searching telemetry data.
+        * PARAMETERS: ([FromQuery] string query) -> [FromQuery] string query) which is used to filter or search the telemetry data.
+        * RETURN: 200 OK with the search results (list of TelemetryDataModel) if data is found.
+                  404 Not Found if no results are found.
+                  500 Internal Server Error if there is an exception.
+        */
         [HttpGet("search")]
         public ActionResult<List<TelemetryDataModel>> SearchTelemetryData([FromQuery] string query)
         {

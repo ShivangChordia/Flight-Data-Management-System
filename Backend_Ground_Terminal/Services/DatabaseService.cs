@@ -1,6 +1,15 @@
-﻿using Backend_Ground_Terminal.Model;
+﻿/*
+* FILE : DatabaseService.cs
+* PROJECT : SENG3020 - Milestone #2 
+* PROGRAMMER : Shivang Chordia, Keval PAtel, Urvish Motivaras & Jaygiri Goswami
+* DATE : 2024-11-22
+* DESCRIPTION : This DatabaseService class provides the functionality for interacting with a database, specifically for storing and querying telemetry data in the Ground Terminal Management System. 
+*/
+
+
+using Backend_Ground_Terminal.Model;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace Ground_Terminal_Management_System.Services
 {
@@ -11,17 +20,30 @@ namespace Ground_Terminal_Management_System.Services
         private static bool _tablesChecked = false; // Flag to check if tables were already created
         private static readonly object _lock = new object();
 
-        // Private constructor to prevent direct instantiation
+        /*
+         * CONSTRUCTOR: Database Service
+         * DESCRIPTION: Private constructor to prevent direct instantiation
+         * PARAMETERS: IConfiguration configuration
+         * RETURN: n/a
+         */
         private DatabaseService(IConfiguration configuration)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            _connectionString = _configuration.GetConnectionString("DefaultConnection");
+            _connectionString = _configuration.GetConnectionString("DefaultConnection")
+              ?? throw new InvalidOperationException("DefaultConnection is not configured.");
             EnsureTableExists(); // Ensure tables exist during initialization
         }
 
         // Public method to initialize and get the instance of DatabaseService
-        public static DatabaseService Instance { get; private set; }
+        public static DatabaseService? Instance { get; private set; }
 
+        /*
+         * FUNCTION: Initialize
+         * DESCRIPTION: A static method to initialize the singleton instance of DatabaseService. It ensures that the Instance is created only once, even if multiple threads try to initialize it 
+                        simultaneously.
+         * PARAMETERS: IConfiguration configuration -> This parameter is of type IConfiguration, which is an interface provided by ASP.NET Core to access configuration settings
+         * RETURN: void
+         */
         public static void Initialize(IConfiguration configuration)
         {
             lock (_lock)
@@ -33,6 +55,12 @@ namespace Ground_Terminal_Management_System.Services
             }
         }
 
+        /*
+        * FUNCTION: EnsureTableExists()
+        * DESCRIPTION: This method ensures that the required datbase table exists, and it creates them if they dont exist.
+        * PARAMETERS: none
+        * RETURN: void
+        */
         public void EnsureTableExists()
         {
             if (_tablesChecked) // Check if the tables have already been created
@@ -86,6 +114,12 @@ namespace Ground_Terminal_Management_System.Services
             }
         }
 
+        /*
+        * FUNCTION: StoreTelemetryData()
+        * DESCRIPTION: The StoreTelemetryData method saves telemetry data into two database tables created in the EnsureTableExists method(), GForceParameters and AttitudeParameters.
+        * PARAMETERS: TelemetryDataModel data -> Telemetry data object passed into the method that contains all the telemetry parameters (e.g., TailNumber, SequenceNumber, Altitude, Pitch, etc.).
+        * RETURN: int -> Returns 1 if data was successfully stored into the database & -1 if not.
+        */
         public int StoreTelemetryData(TelemetryDataModel data)
         {
             try
@@ -127,7 +161,6 @@ namespace Ground_Terminal_Management_System.Services
                         attitudeCommand.Parameters.Add("@Altitude", SqlDbType.Float).Value = data.Altitude;
                         attitudeCommand.Parameters.Add("@Pitch", SqlDbType.Float).Value = data.Pitch;
                         attitudeCommand.Parameters.Add("@Bank", SqlDbType.Float).Value = data.Bank;
-
                         attitudeCommand.ExecuteNonQuery();
                     }
                 }
@@ -141,6 +174,12 @@ namespace Ground_Terminal_Management_System.Services
             }
         }
 
+        /*
+       * FUNCTION: SearchTelemetryData()
+       * DESCRIPTION: This method fetches telemetry data for a specific aircraft identified by tailNumber, merging records from the two related tables and ensuring no duplicate entries exist.
+       * PARAMETERS: string tailNumber -> Tail Number of the flight
+       * RETURN: TelemetryDataModel -> Returns the final list of telemetry data models.
+       */
         public List<TelemetryDataModel> SearchTelemetryData(string tailNumber)
         {
             var telemetryData = new List<TelemetryDataModel>();
@@ -201,9 +240,5 @@ namespace Ground_Terminal_Management_System.Services
 
             return telemetryData;
         }
-
-
-
-
     }
 }

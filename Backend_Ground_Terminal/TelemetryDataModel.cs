@@ -1,4 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/*
+* FILE : TelemetryDataModel.cs
+* PROJECT : SENG3020 - Milestone #2 
+* PROGRAMMER : Shivang Chordia, Keval PAtel, Urvish Motivaras & Jaygiri Goswami
+* DATE : 2024-11-22
+* DESCRIPTION : This file defines the TelemetryDataModel class, which represents the structure of telemetry data in the Backend Ground Terminal system. 
+*/
+
+using System.ComponentModel.DataAnnotations;
 
 namespace Backend_Ground_Terminal.Model
 {

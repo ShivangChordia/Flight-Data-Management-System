@@ -1,23 +1,23 @@
 {
   "Files": [
     {
-      "Id": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GUI_Ground_Terminal.bundle.scp.css",
+      "Id": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GUI_Ground_Terminal.bundle.scp.css",
       "PackagePath": "staticwebassets\\GUI_Ground_Terminal.bundle.scp.css"
     },
     {
-      "Id": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\app.css",
+      "Id": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "D:\\Advanced Software Quality\\Flight_DMS\\GUI_Ground_Terminal\\wwwroot\\favicon.png",
+      "Id": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\GUI_Ground_Terminal\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
