@@ -1,3 +1,12 @@
+/*
+* FILE : Program.cs
+* PROJECT : SENG3020 - Milestone #2 
+* PROGRAMMER : Shivang Chordia, Keval PAtel, Urvish Motivaras & Jaygiri Goswami
+* DATE : 2024-11-22
+* DESCRIPTION : This file sets up a .NET Core Web API application for managing a ground terminal system. It configures services, middleware, and routing to support telemetry data handling and
+*               real-time communication
+*/
+
 using Backend_Ground_Terminal;
 using Ground_Terminal_Management_System.Services;
 using Microsoft.AspNetCore.SignalR;
