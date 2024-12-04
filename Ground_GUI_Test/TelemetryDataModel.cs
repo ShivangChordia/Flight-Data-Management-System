@@ -6,18 +6,16 @@
 * DESCRIPTION : This file defines the TelemetryDataModel class, which represents the structure of telemetry data in the Backend Ground Terminal system. 
 */
 
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SharedModels
+namespace Ground_GUI_Test
 {
-
     public class TelemetryDataModel
     {
         [Key]
-        public string? TailNumber { get; set; }
+        public string TailNumber { get; set; }
         public int SequenceNumber { get; set; }
-        public DateTime? Timestamp { get; set; }
+        public string Timestamp { get; set; }
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }

@@ -1,35 +1,66 @@
 ﻿@page "/fetchdata"
+@inject IHttpClientFactory HttpClientFactory
+@using System.Net.Http.Json
+@using Ground_GUI_Test  <!-- This is the namespace for your TelemetryDataModel -->
 
-@using Ground_GUI_Test.Data
-@inject WeatherForecastService ForecastService
+<h3>Search Telemetry Data</h3>
 
-<h1>Weather forecast</h1>
+<div>
+    <label for="query">Enter Tail Number:</label>
+    <input type="text" id="query" @bind="query" placeholder="Enter tail number" />
+    <button @onclick="SearchTelemetryData">Search</button>
+</div>
 
-<p>This component demonstrates fetching data from a service.</p>
-
-@if (forecasts == null)
+@if (loading)
 {
-    <p><em>Loading...</em></p>
+    <div class="alert alert-info" role="alert">
+        <strong>Loading...</strong> Please wait while we fetch the data.
+    </div>
+}
+else if (telemetryData == null)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Error!</strong> There was an issue fetching the data. Please try again later.
+    </div>
+}
+else if (telemetryData.Count == 0)
+{
+    <div class="alert alert-warning" role="alert">
+        <strong>No Results Found!</strong> No data was found for the tail number you entered. Please check the tail number and try again.
+    </div>
 }
 else
 {
-    <table class="table">
-        <thead>
+    <h2>Search Results</h2>
+    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead style="background-color: #f2f2f2;">
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Tail Number</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Sequence Number</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Timestamp</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">X</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Y</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Z</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Weight</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Altitude</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Pitch</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Bank</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var result in telemetryData)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@result.TailNumber</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@result.SequenceNumber</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@result.Timestamp</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@result.X</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@result.Y</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@result.Z</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@result.Weight</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@result.Altitude</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@result.Pitch</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@result.Bank</td>
                 </tr>
             }
         </tbody>
@@ -37,10 +68,45 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private string query;
+    private List<TelemetryDataModel> telemetryData;
+    private bool loading;
 
-    protected override async Task OnInitializedAsync()
+    private async Task SearchTelemetryData()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        if (string.IsNullOrEmpty(query))
+        {
+            return; // Optionally, show a message about invalid input
+        }
+
+        loading = true;
+        telemetryData = null; // Clear the previous search results
+
+        try
+        {
+            var client = HttpClientFactory.CreateClient("BackendAPI");  // Use the backend API client
+
+            // Make sure the endpoint is appended correctly to the base address.
+            var response = await client.GetFromJsonAsync<List<TelemetryDataModel>>($"api/telemetryController/search?query={query}");
+
+            if (response != null && response.Any())
+            {
+                telemetryData = response;
+            }
+            else
+            {
+                telemetryData = new List<TelemetryDataModel>(); // No results found
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle error (e.g., API failure)
+            telemetryData = null;
+            Console.WriteLine($"Error fetching data: {ex.Message}");
+        }
+        finally
+        {
+            loading = false;
+        }
     }
 }

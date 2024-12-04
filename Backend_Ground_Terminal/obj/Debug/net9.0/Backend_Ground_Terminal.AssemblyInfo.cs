@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Backend_Ground_Terminal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39005fe6def98968ef32a1a191007d4d420762f2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9cc48ba8d0bb3160f3ed8669c593dab2c5f02526")]
 [assembly: System.Reflection.AssemblyProductAttribute("Backend_Ground_Terminal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Backend_Ground_Terminal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

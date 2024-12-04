@@ -7,7 +7,7 @@
 *               real-time communication
 */
 
-using Backend_Ground_Terminal;
+using Backend_Ground_Terminal.Hubs;
 using Ground_Terminal_Management_System.Services;
 using Microsoft.AspNetCore.SignalR;
 
@@ -38,7 +38,7 @@ builder.Services.AddSingleton<TcpMessageReaderService>(provider =>
     var databaseService = provider.GetRequiredService<DatabaseService>();
     var hubContext = provider.GetRequiredService<IHubContext<TelemetryHub>>();
 
-    return new TcpMessageReaderService(5000, databaseService, hubContext);
+    return new TcpMessageReaderService(12000, databaseService, hubContext);
 });
 
 // Register a hosted service to run TcpMessageReaderService in the background.

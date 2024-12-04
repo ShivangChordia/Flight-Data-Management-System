@@ -1,40 +1,99 @@
 ﻿@page "/telemetry-dashboard"
 @using Microsoft.AspNetCore.SignalR.Client
-@using SharedModels
+@using Ground_GUI_Test
 @inject NavigationManager Navigation
 
 <PageTitle>Telemetry Dashboard</PageTitle>
 
 <h3>Real-Time Telemetry</h3>
 
-<ul id="telemetryList">
-    @foreach (var data in telemetryData)
-    {
-        <li>@data</li>
-    }
-</ul>
+@if (!isConnected)
+{
+    <div class="alert alert-warning" role="alert">
+        Please check the server connection. Maybe the server is Down
+    </div>
+}
+else if (telemetryData.Count == 0)
+{
+    <div class="alert alert-info" role="alert">
+        No aircraft are currently in the air.
+    </div>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Tail Number</th>
+                <th>Sequence Number</th>
+                <th>Timestamp</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Z</th>
+                <th>Weight</th>
+                <th>Altitude</th>
+                <th>Pitch</th>
+                <th>Bank</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var data in telemetryData)
+            {
+                <tr>
+                    <td>@data.TailNumber</td>
+                    <td>@data.SequenceNumber</td>
+                    <td>@data.Timestamp</td>
+                    <td>@data.X</td>
+                    <td>@data.Y</td>
+                    <td>@data.Z</td>
+                    <td>@data.Weight</td>
+                    <td>@data.Altitude</td>
+                    <td>@data.Pitch</td>
+                    <td>@data.Bank</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
-    private HubConnection? hubConnection;
-    private List<string> telemetryData = new List<string>();
+    private HubConnection hubConnection;
+    private List<TelemetryDataModel> telemetryData = new List<TelemetryDataModel>();
+    private const int MaxTelemetryRecords = 15; // Maximum number of records to keep
+    private bool isConnected = false;
 
     protected override async Task OnInitializedAsync()
     {
-        hubConnection = new HubConnectionBuilder()
-            .WithUrl("http://localhost:5000/telemetryhub") // Connect to backend's SignalR hub
-            .Build();
-
-        // Listen for real-time telemetry data
-        hubConnection.On<TelemetryDataModel>("ReceiveTelemetry", (telemetry) =>
+        try
         {
-            telemetryData.Add(telemetry.ToString());
-            InvokeAsync(StateHasChanged); // Update UI
-        });
+            hubConnection = new HubConnectionBuilder()
+                .WithUrl("https://localhost:7224/telemetryhub") // Connect to backend's SignalR hub
+                .Build();
 
-        // Start the connection
-        await hubConnection.StartAsync();
+            // Listen for real-time telemetry data
+            hubConnection.On<TelemetryDataModel>("ReceiveTelemetry", (telemetry) =>
+            {
+                telemetryData.Insert(0, telemetry); // Add the newest telemetry data to the top
+
+                // Ensure the list doesn't exceed the maximum record limit
+                if (telemetryData.Count > MaxTelemetryRecords)
+                {
+                    telemetryData.RemoveAt(telemetryData.Count - 1); // Remove the oldest data
+                }
+
+                InvokeAsync(StateHasChanged); // Update UI
+            });
+
+            // Start the connection
+            await hubConnection.StartAsync();
+            isConnected = true; // Set the connection status to true when the connection is established
+        }
+        catch (Exception ex)
+        {
+            isConnected = false; // Set the connection status to false if an error occurs
+            Console.WriteLine("Error connecting to SignalR hub: " + ex.Message); // Log the error for debugging
+        }
     }
-
 
     public async ValueTask DisposeAsync()
     {
