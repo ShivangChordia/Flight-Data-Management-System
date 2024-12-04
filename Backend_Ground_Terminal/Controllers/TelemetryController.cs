@@ -9,7 +9,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Ground_Terminal_Management_System.Services;
-using Backend_Ground_Terminal.Model;
+using SharedModels;
 
 namespace Ground_Terminal_Management_System.Controllers
 {
@@ -39,11 +39,12 @@ namespace Ground_Terminal_Management_System.Controllers
                   500 Internal Server Error if there is an exception.
         */
         [HttpGet("search")]
-        public ActionResult<List<TelemetryDataModel>> SearchTelemetryData([FromQuery] string query)
+        public async Task<ActionResult<List<TelemetryDataModel>>> SearchTelemetryData([FromQuery] string query)
         {
             try
             {
-                var telemetryData = _databaseService.SearchTelemetryData(query);
+                // Await the method to get the actual telemetry data list
+                var telemetryData = await _databaseService.SearchTelemetryDataAsync(query);
 
                 if (telemetryData == null || telemetryData.Count == 0)
                 {
@@ -57,5 +58,6 @@ namespace Ground_Terminal_Management_System.Controllers
                 return StatusCode(500, new { message = $"Error occurred: {ex.Message}" });
             }
         }
+
     }
 }

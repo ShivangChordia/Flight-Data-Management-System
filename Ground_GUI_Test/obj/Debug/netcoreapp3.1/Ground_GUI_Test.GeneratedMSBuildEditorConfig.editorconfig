@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = Ground_GUI_Test
+build_property.ProjectDir = C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Ground_GUI_Test\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

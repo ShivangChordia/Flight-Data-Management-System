@@ -7,11 +7,35 @@
 */
 
 using Microsoft.AspNetCore.SignalR;
+using System.Collections.Concurrent;
+using SharedModels;
 
 namespace Backend_Ground_Terminal
 {
     public class TelemetryHub : Hub
     {
+        private static readonly ConcurrentDictionary<string, string> _connectedClients = new();
+
+        // Expose the connected clients as a read-only property
+        public static int ConnectedClientCount => _connectedClients.Count;
+        public override Task OnConnectedAsync()
+        {
+            _connectedClients.TryAdd(Context.ConnectionId, "Connected");
+            Console.WriteLine($"Client connected: {Context.ConnectionId}. Active clients: {_connectedClients.Count}");
+            return base.OnConnectedAsync();
+        }
+
+        public override Task OnDisconnectedAsync(Exception? exception)
+        {
+            _connectedClients.TryRemove(Context.ConnectionId, out _);
+            Console.WriteLine($"Client disconnected: {Context.ConnectionId}. Active clients: {_connectedClients.Count}");
+            if (exception != null)
+            {
+                Console.WriteLine($"Disconnection error: {exception.Message}");
+            }
+            return base.OnDisconnectedAsync(exception);
+        }
+
         /*
        * FUNCTION: BroadcastTelemetry()
        * DESCRIPTION: Method to broadcast data to all connected clients
@@ -19,9 +43,9 @@ namespace Backend_Ground_Terminal
        * RETURN: Task 
        */
         // 
-        public async Task BroadcastTelemetry(string packet)
+        public async Task BroadcastTelemetry(TelemetryDataModel telemetryData)
         {
-            await Clients.All.SendAsync("ReceiveTelemetry", packet);
+            await Clients.All.SendAsync("ReceiveTelemetry", telemetryData);
         }
     }
 }

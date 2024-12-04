@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.SignalR;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddSignalR();
 
 builder.Services.AddControllers();
@@ -26,7 +25,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton(provider =>
 {
     var configuration = builder.Configuration; // Access IConfiguration
-    DatabaseService.Initialize(configuration);  // Initialize DatabaseService with configuration
+    var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<DatabaseService>();
+    DatabaseService.Initialize(configuration, logger);  // Initialize DatabaseService with configuration
 
     // Ensure DatabaseService is not nullable when used
     return DatabaseService.Instance ?? throw new InvalidOperationException("DatabaseService instance is not initialized.");

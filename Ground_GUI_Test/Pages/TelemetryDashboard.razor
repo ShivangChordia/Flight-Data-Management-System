@@ -1,0 +1,46 @@
+﻿@page "/telemetry-dashboard"
+@using Microsoft.AspNetCore.SignalR.Client
+@using SharedModels
+@inject NavigationManager Navigation
+
+<PageTitle>Telemetry Dashboard</PageTitle>
+
+<h3>Real-Time Telemetry</h3>
+
+<ul id="telemetryList">
+    @foreach (var data in telemetryData)
+    {
+        <li>@data</li>
+    }
+</ul>
+
+@code {
+    private HubConnection? hubConnection;
+    private List<string> telemetryData = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl("http://localhost:5000/telemetryhub") // Connect to backend's SignalR hub
+            .Build();
+
+        // Listen for real-time telemetry data
+        hubConnection.On<TelemetryDataModel>("ReceiveTelemetry", (telemetry) =>
+        {
+            telemetryData.Add(telemetry.ToString());
+            InvokeAsync(StateHasChanged); // Update UI
+        });
+
+        // Start the connection
+        await hubConnection.StartAsync();
+    }
+
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+}

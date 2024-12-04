@@ -10,7 +10,7 @@
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
-using Backend_Ground_Terminal.Model;
+using SharedModels;
 using Backend_Ground_Terminal;
 using Microsoft.AspNetCore.SignalR;
 
@@ -23,6 +23,8 @@ namespace Ground_Terminal_Management_System.Services
         private CancellationTokenSource? _cancellationTokenSource;
         private readonly DatabaseService _databaseService;
         private readonly IHubContext<TelemetryHub> _hubContext; // SignalR Hub Context
+        private readonly SemaphoreSlim _semaphore = new(1, 1); // For thread-safe database operations
+
 
         /*
        * FUNCTION: TcpMessageReaderService()
@@ -59,7 +61,7 @@ namespace Ground_Terminal_Management_System.Services
                     Console.WriteLine("Waiting for client connections...");
                     TcpClient client = await _listener.AcceptTcpClientAsync(_cancellationTokenSource.Token);
 
-                    // Handle the client connection in a separate task.
+                    // Handle each client connection in a separate task
                     _ = Task.Run(() => HandleClientAsync(client, _cancellationTokenSource.Token));
                 }
             }
@@ -69,10 +71,11 @@ namespace Ground_Terminal_Management_System.Services
             }
             finally
             {
-                _listener.Stop();
+                _listener?.Stop();
                 Console.WriteLine("TCP Message Reader stopped.");
             }
         }
+
 
         /*
         * FUNCTION: stop()
@@ -95,7 +98,9 @@ namespace Ground_Terminal_Management_System.Services
         */
         private async Task HandleClientAsync(TcpClient client, CancellationToken cancellationToken)
         {
-            Console.WriteLine("Client connected.");
+            var clientEndpoint = client.Client.RemoteEndPoint?.ToString() ?? "Unknown";
+            Console.WriteLine($"[TCP] Telemetry transmission system connected: {clientEndpoint}");
+
             using NetworkStream stream = client.GetStream();
             byte[] buffer = new byte[1024];
 
@@ -103,41 +108,39 @@ namespace Ground_Terminal_Management_System.Services
             {
                 while (!cancellationToken.IsCancellationRequested)
                 {
-
                     int bytesRead = await stream.ReadAsync(buffer.AsMemory(0, buffer.Length), cancellationToken);
 
                     if (bytesRead == 0)
                     {
-                        Console.WriteLine("Client disconnected.");
+                        Console.WriteLine($"[TCP] Telemetry transmission system disconnected: {clientEndpoint}");
                         break;
                     }
 
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine($"Received: {message}");
+                    Console.WriteLine($"[TCP] Received telemetry: {message}");
 
-                    // Parse and forward to Database Service
+                    // Parse and process the telemetry data
                     var telemetryData = TelemetryParser.Parse(message);
                     if (telemetryData == null)
                     {
-                        Console.WriteLine("Invalid telemetry data. Skipping...");
+                        Console.WriteLine("[TCP] Invalid telemetry data. Skipping...");
                         continue;
                     }
 
-                    // Process Telemetry data and forward it to Blazor page
-                   await ProcessTelemetryDataAsync(telemetryData, message);
-
-                    
+                    // Safely process telemetry data
+                    await ProcessTelemetryDataAsync(telemetryData, message);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error handling client: {ex.Message}");
+                Console.WriteLine($"[TCP] Error handling telemetry connection ({clientEndpoint}): {ex.Message}");
             }
             finally
             {
                 client.Close();
             }
         }
+
 
         /*
         * FUNCTION: ProcessTelemetryDataAsync()
@@ -147,21 +150,34 @@ namespace Ground_Terminal_Management_System.Services
         *             String message ->  This is the raw telemetry message (as a string) received from the client. 
         * RETURN: n/a
         */
-        private async Task ProcessTelemetryDataAsync(TelemetryDataModel telemetryData, String message)
+        private async Task ProcessTelemetryDataAsync(TelemetryDataModel telemetryData, string message)
         {
+            await _semaphore.WaitAsync(); // Ensure thread-safe access to the database
             try
             {
-                _databaseService.StoreTelemetryData(telemetryData); // Store in Database
-                
+                // Store telemetry data in the database
+                await _databaseService.StoreTelemetryDataAsync(telemetryData);
                 Console.WriteLine("Telemetry data successfully stored!");
 
-                // Broadcast telemetry data to SignalR clients
-                await _hubContext.Clients.All.SendAsync("ReceiveTelemetry", message);
-                Console.WriteLine("Telemetry data broadcasted to SignalR clients.");
+                // Broadcast only if there are active clients
+                var activeClients = TelemetryHub.ConnectedClientCount; // Access from TelemetryHub
+                if (activeClients > 0)
+                {
+                    await _hubContext.Clients.All.SendAsync("ReceiveTelemetry", telemetryData);
+                    Console.WriteLine($"Telemetry data broadcasted to {activeClients} SignalR clients.");
+                }
+                else
+                {
+                    Console.WriteLine("No active SignalR clients. Skipping broadcast.");
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error storing telemetry data: {ex.Message}");
+                Console.WriteLine($"Error processing telemetry data: {ex.Message}");
+            }
+            finally
+            {
+                _semaphore.Release();
             }
         }
     }
