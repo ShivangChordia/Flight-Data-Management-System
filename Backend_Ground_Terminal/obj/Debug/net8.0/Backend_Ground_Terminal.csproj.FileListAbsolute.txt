@@ -39,6 +39,8 @@ D:\Advanced Software Quality\Flight_DMS\Backend_Ground_Terminal\bin\Debug\net8.0
 D:\Advanced Software Quality\Flight_DMS\Backend_Ground_Terminal\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\Advanced Software Quality\Flight_DMS\Backend_Ground_Terminal\obj\Debug\net8.0\Backend_Ground_Terminal.MvcApplicationPartsAssemblyInfo.cs
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\appsettings.Development.json
+C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\appsettings.json
+C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Backend_Ground_Terminal.staticwebassets.endpoints.json
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Backend_Ground_Terminal.exe
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Backend_Ground_Terminal.deps.json
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Backend_Ground_Terminal.runtimeconfig.json
@@ -58,7 +60,6 @@ C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -67,7 +68,6 @@ C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\System.Data.SqlClient.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\System.Memory.Data.dll
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\System.Runtime.Caching.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\bin\Debug\net8.0\de\Microsoft.Data.SqlClient.resources.dll
@@ -100,14 +100,17 @@ C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\Backend_Ground_Terminal.MvcApplicationPartsAssemblyInfo.cs
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\Backend_Ground_Terminal.MvcApplicationPartsAssemblyInfo.cache
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\Backend_Ground_Terminal.sourcelink.json
+C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\scopedcss\bundle\Backend_Ground_Terminal.styles.css
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\staticwebassets.build.json
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\staticwebassets.development.json
+C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\staticwebassets\msbuild.Backend_Ground_Terminal.Microsoft.AspNetCore.StaticWebAssets.props
+C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\staticwebassets\msbuild.Backend_Ground_Terminal.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\staticwebassets\msbuild.build.Backend_Ground_Terminal.props
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Backend_Ground_Terminal.props
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Backend_Ground_Terminal.props
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\staticwebassets.pack.json
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\scopedcss\bundle\Backend_Ground_Terminal.styles.css
+C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\Backend_.59FD1BA0.Up2Date
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\Backend_Ground_Terminal.dll
 C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Backend_Ground_Terminal\obj\Debug\net8.0\refint\Backend_Ground_Terminal.dll

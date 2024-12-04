@@ -7,9 +7,9 @@
 */
 
 
-using Backend_Ground_Terminal.Model;
 using System.Data;
 using Microsoft.Data.SqlClient;
+using SharedModels;
 
 namespace Ground_Terminal_Management_System.Services
 {
@@ -19,6 +19,7 @@ namespace Ground_Terminal_Management_System.Services
         private readonly string _connectionString;
         private static bool _tablesChecked = false; // Flag to check if tables were already created
         private static readonly object _lock = new object();
+        private readonly ILogger<DatabaseService> _logger;
 
         /*
          * CONSTRUCTOR: Database Service
@@ -26,12 +27,14 @@ namespace Ground_Terminal_Management_System.Services
          * PARAMETERS: IConfiguration configuration
          * RETURN: n/a
          */
-        private DatabaseService(IConfiguration configuration)
+        private DatabaseService(IConfiguration configuration, ILogger<DatabaseService> logger)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _connectionString = _configuration.GetConnectionString("DefaultConnection")
               ?? throw new InvalidOperationException("DefaultConnection is not configured.");
-            EnsureTableExists(); // Ensure tables exist during initialization
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+            EnsureTableExists().Wait(); // Ensure tables exist during initialization (asynchronously)
         }
 
         // Public method to initialize and get the instance of DatabaseService
@@ -44,13 +47,13 @@ namespace Ground_Terminal_Management_System.Services
          * PARAMETERS: IConfiguration configuration -> This parameter is of type IConfiguration, which is an interface provided by ASP.NET Core to access configuration settings
          * RETURN: void
          */
-        public static void Initialize(IConfiguration configuration)
+        public static void Initialize(IConfiguration configuration, ILogger<DatabaseService> logger)
         {
             lock (_lock)
             {
                 if (Instance == null)
                 {
-                    Instance = new DatabaseService(configuration);
+                    Instance = new DatabaseService(configuration, logger);
                 }
             }
         }
@@ -61,7 +64,7 @@ namespace Ground_Terminal_Management_System.Services
         * PARAMETERS: none
         * RETURN: void
         */
-        public void EnsureTableExists()
+        public async Task EnsureTableExists()
         {
             if (_tablesChecked) // Check if the tables have already been created
                 return;
@@ -70,7 +73,8 @@ namespace Ground_Terminal_Management_System.Services
             {
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    connection.Open();
+                    await connection.OpenAsync();
+
                     string createTableQuery = @"
                         IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'GForceParameters')
                         BEGIN
@@ -101,7 +105,7 @@ namespace Ground_Terminal_Management_System.Services
 
                     using (var command = new SqlCommand(createTableQuery, connection))
                     {
-                        command.ExecuteNonQuery();
+                        await command.ExecuteNonQueryAsync();
                     }
                 }
 
@@ -109,8 +113,7 @@ namespace Ground_Terminal_Management_System.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error while ensuring table existence: {ex.Message}");
-                // Optionally, log this exception or rethrow based on your business logic
+                _logger.LogError(ex, "Error while ensuring table existence.");
             }
         }
 
@@ -120,59 +123,67 @@ namespace Ground_Terminal_Management_System.Services
         * PARAMETERS: TelemetryDataModel data -> Telemetry data object passed into the method that contains all the telemetry parameters (e.g., TailNumber, SequenceNumber, Altitude, Pitch, etc.).
         * RETURN: int -> Returns 1 if data was successfully stored into the database & -1 if not.
         */
-        public int StoreTelemetryData(TelemetryDataModel data)
+        public async Task<int> StoreTelemetryDataAsync(TelemetryDataModel data)
         {
             try
             {
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    connection.Open();
+                    await connection.OpenAsync();
 
-                    // Insert data into GForceParameters
-                    string insertGForceQuery = @"
-                INSERT INTO GForceParameters 
-                (TailNumber, SequenceNumber, Timestamp, X, Y, Z, Weight)
-                VALUES (@TailNumber, @SequenceNumber, @Timestamp, @X, @Y, @Z, @Weight)";
-
-                    using (var gForceCommand = new SqlCommand(insertGForceQuery, connection))
+                    // Start a transaction
+                    using (var transaction = await connection.BeginTransactionAsync())
                     {
-                        gForceCommand.Parameters.Add("@TailNumber", SqlDbType.NVarChar).Value = data.TailNumber;
-                        gForceCommand.Parameters.Add("@SequenceNumber", SqlDbType.Int).Value = data.SequenceNumber;
-                        gForceCommand.Parameters.Add("@Timestamp", SqlDbType.DateTime2).Value = DateTime.Now;
-                        gForceCommand.Parameters.Add("@X", SqlDbType.Float).Value = data.X;
-                        gForceCommand.Parameters.Add("@Y", SqlDbType.Float).Value = data.Y;
-                        gForceCommand.Parameters.Add("@Z", SqlDbType.Float).Value = data.Z;
-                        gForceCommand.Parameters.Add("@Weight", SqlDbType.Float).Value = data.Weight;
+                        // Insert data into GForceParameters
+                        string insertGForceQuery = @"
+                            INSERT INTO GForceParameters 
+                            (TailNumber, SequenceNumber, Timestamp, X, Y, Z, Weight)
+                            VALUES (@TailNumber, @SequenceNumber, @Timestamp, @X, @Y, @Z, @Weight)";
 
-                        gForceCommand.ExecuteNonQuery();
-                    }
+                        using (var gForceCommand = new SqlCommand(insertGForceQuery, connection, (SqlTransaction)transaction))
+                        {
+                            gForceCommand.Parameters.Add("@TailNumber", SqlDbType.NVarChar).Value = data.TailNumber;
+                            gForceCommand.Parameters.Add("@SequenceNumber", SqlDbType.Int).Value = data.SequenceNumber;
+                            gForceCommand.Parameters.Add("@Timestamp", SqlDbType.DateTime2).Value = DateTime.Now;
+                            gForceCommand.Parameters.Add("@X", SqlDbType.Float).Value = data.X;
+                            gForceCommand.Parameters.Add("@Y", SqlDbType.Float).Value = data.Y;
+                            gForceCommand.Parameters.Add("@Z", SqlDbType.Float).Value = data.Z;
+                            gForceCommand.Parameters.Add("@Weight", SqlDbType.Float).Value = data.Weight;
 
-                    // Insert data into AttitudeParameters
-                    string insertAttitudeQuery = @"
-                INSERT INTO AttitudeParameters 
-                (TailNumber, SequenceNumber, Timestamp, Altitude, Pitch, Bank)
-                VALUES (@TailNumber, @SequenceNumber, @Timestamp, @Altitude, @Pitch, @Bank)";
+                            await gForceCommand.ExecuteNonQueryAsync();
+                        }
 
-                    using (var attitudeCommand = new SqlCommand(insertAttitudeQuery, connection))
-                    {
-                        attitudeCommand.Parameters.Add("@TailNumber", SqlDbType.NVarChar).Value = data.TailNumber;
-                        attitudeCommand.Parameters.Add("@SequenceNumber", SqlDbType.Int).Value = data.SequenceNumber;
-                        attitudeCommand.Parameters.Add("@Timestamp", SqlDbType.DateTime2).Value = DateTime.Now;
-                        attitudeCommand.Parameters.Add("@Altitude", SqlDbType.Float).Value = data.Altitude;
-                        attitudeCommand.Parameters.Add("@Pitch", SqlDbType.Float).Value = data.Pitch;
-                        attitudeCommand.Parameters.Add("@Bank", SqlDbType.Float).Value = data.Bank;
-                        attitudeCommand.ExecuteNonQuery();
+                        // Insert data into AttitudeParameters
+                        string insertAttitudeQuery = @"
+                            INSERT INTO AttitudeParameters 
+                            (TailNumber, SequenceNumber, Timestamp, Altitude, Pitch, Bank)
+                            VALUES (@TailNumber, @SequenceNumber, @Timestamp, @Altitude, @Pitch, @Bank)";
+
+                        using (var attitudeCommand = new SqlCommand(insertAttitudeQuery, connection, (SqlTransaction)transaction))
+                        {
+                            attitudeCommand.Parameters.Add("@TailNumber", SqlDbType.NVarChar).Value = data.TailNumber;
+                            attitudeCommand.Parameters.Add("@SequenceNumber", SqlDbType.Int).Value = data.SequenceNumber;
+                            attitudeCommand.Parameters.Add("@Timestamp", SqlDbType.DateTime2).Value = DateTime.Now;
+                            attitudeCommand.Parameters.Add("@Altitude", SqlDbType.Float).Value = data.Altitude;
+                            attitudeCommand.Parameters.Add("@Pitch", SqlDbType.Float).Value = data.Pitch;
+                            attitudeCommand.Parameters.Add("@Bank", SqlDbType.Float).Value = data.Bank;
+
+                            await attitudeCommand.ExecuteNonQueryAsync();
+                        }
+
+                        // Commit the transaction
+                        await transaction.CommitAsync();
                     }
                 }
                 return 1;
-
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error storing telemetry data: {ex.Message}");
-                return -1;  
+                _logger.LogError(ex, "Error storing telemetry data.");
+                return -1;
             }
         }
+
 
         /*
        * FUNCTION: SearchTelemetryData()
@@ -180,7 +191,7 @@ namespace Ground_Terminal_Management_System.Services
        * PARAMETERS: string tailNumber -> Tail Number of the flight
        * RETURN: TelemetryDataModel -> Returns the final list of telemetry data models.
        */
-        public List<TelemetryDataModel> SearchTelemetryData(string tailNumber)
+        public async Task<List<TelemetryDataModel>> SearchTelemetryDataAsync(string tailNumber)
         {
             var telemetryData = new List<TelemetryDataModel>();
 
@@ -188,26 +199,26 @@ namespace Ground_Terminal_Management_System.Services
             {
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    connection.Open();
+                    await connection.OpenAsync();
 
                     // SQL query to join GForceParameters and AttitudeParameters
                     string query = @"
-                SELECT 
-                    g.TailNumber, g.SequenceNumber, g.Timestamp, g.X, g.Y, g.Z, g.Weight,
-                    a.Altitude, a.Pitch, a.Bank
-                FROM GForceParameters g
-                INNER JOIN AttitudeParameters a
-                ON g.TailNumber = a.TailNumber AND g.SequenceNumber = a.SequenceNumber
-                WHERE g.TailNumber = @TailNumber
-                ORDER BY g.Timestamp";
+                        SELECT 
+                            g.TailNumber, g.SequenceNumber, g.Timestamp, g.X, g.Y, g.Z, g.Weight,
+                            a.Altitude, a.Pitch, a.Bank
+                        FROM GForceParameters g
+                        INNER JOIN AttitudeParameters a
+                        ON g.TailNumber = a.TailNumber AND g.SequenceNumber = a.SequenceNumber
+                        WHERE g.TailNumber = @TailNumber
+                        ORDER BY g.Timestamp";
 
                     using (var command = new SqlCommand(query, connection))
                     {
                         command.Parameters.Add("@TailNumber", SqlDbType.NVarChar).Value = tailNumber;
 
-                        using (var reader = command.ExecuteReader())
+                        using (var reader = await command.ExecuteReaderAsync())
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 telemetryData.Add(new TelemetryDataModel
                                 {
@@ -235,7 +246,7 @@ namespace Ground_Terminal_Management_System.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error fetching telemetry data: {ex.Message}");
+                _logger.LogError(ex, "Error fetching telemetry data.");
             }
 
             return telemetryData;

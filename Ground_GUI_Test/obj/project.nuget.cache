@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "dgSpecHash": "/LXsQWrpQ3U=",
+  "success": true,
+  "projectFilePath": "C:\\SET\\Fifth_SEM\\Advanced Software Quality\\Flight-Data-Management-System\\Ground_GUI_Test\\Ground_GUI_Test.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\9.0.0\\microsoft.aspnetcore.connections.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.aspnetcore.http.connections.client\\9.0.0\\microsoft.aspnetcore.http.connections.client.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.aspnetcore.http.connections.common\\9.0.0\\microsoft.aspnetcore.http.connections.common.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.aspnetcore.signalr.client\\9.0.0\\microsoft.aspnetcore.signalr.client.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.aspnetcore.signalr.client.core\\9.0.0\\microsoft.aspnetcore.signalr.client.core.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.aspnetcore.signalr.common\\9.0.0\\microsoft.aspnetcore.signalr.common.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.aspnetcore.signalr.protocols.json\\9.0.0\\microsoft.aspnetcore.signalr.protocols.json.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.0\\microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.0\\microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.extensions.features\\9.0.0\\microsoft.extensions.features.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.extensions.logging\\9.0.0\\microsoft.extensions.logging.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.0\\microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.extensions.options\\9.0.0\\microsoft.extensions.options.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.0\\microsoft.extensions.primitives.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\system.net.serversentevents\\9.0.0\\system.net.serversentevents.9.0.0.nupkg.sha512",
+    "C:\\Users\\patel\\.nuget\\packages\\system.threading.channels\\9.0.0\\system.threading.channels.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
