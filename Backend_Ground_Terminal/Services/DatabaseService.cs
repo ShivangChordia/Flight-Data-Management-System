@@ -8,8 +8,8 @@
 
 
 using System.Data;
+using Backend_Ground_Terminal.Model;
 using Microsoft.Data.SqlClient;
-using SharedModels;
 
 namespace Ground_Terminal_Management_System.Services
 {
@@ -224,7 +224,7 @@ namespace Ground_Terminal_Management_System.Services
                                 {
                                     TailNumber = reader["TailNumber"].ToString(),
                                     SequenceNumber = Convert.ToInt32(reader["SequenceNumber"]),
-                                    Timestamp = Convert.ToDateTime(reader["Timestamp"]),
+                                    Timestamp = reader["Timestamp"].ToString(),
                                     X = (float)Convert.ToDouble(reader["X"]),
                                     Y = (float)Convert.ToDouble(reader["Y"]),
                                     Z = (float)Convert.ToDouble(reader["Z"]),

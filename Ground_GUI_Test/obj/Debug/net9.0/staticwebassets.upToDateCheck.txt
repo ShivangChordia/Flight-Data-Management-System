@@ -1,11 +1,11 @@
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\favicon.ico
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\site.css
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\open-iconic\README.md
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\open-iconic\font\fonts\open-iconic.svg
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\bootstrap\bootstrap.min.css.map
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\bootstrap\bootstrap.min.css
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\open-iconic\font\fonts\open-iconic.otf
-C:\SET\Fifth_SEM\Advanced Software Quality\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\open-iconic\font\css\open-iconic-bootstrap.min.css
+D:\Advanced Software Quality\Dup_Repo_FDMS\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\favicon.ico
+D:\Advanced Software Quality\Dup_Repo_FDMS\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\site.css
+D:\Advanced Software Quality\Dup_Repo_FDMS\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\open-iconic\README.md
+D:\Advanced Software Quality\Dup_Repo_FDMS\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\open-iconic\font\fonts\open-iconic.svg
+D:\Advanced Software Quality\Dup_Repo_FDMS\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\bootstrap\bootstrap.min.css.map
+D:\Advanced Software Quality\Dup_Repo_FDMS\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\bootstrap\bootstrap.min.css
+D:\Advanced Software Quality\Dup_Repo_FDMS\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\open-iconic\font\fonts\open-iconic.otf
+D:\Advanced Software Quality\Dup_Repo_FDMS\Flight-Data-Management-System\Ground_GUI_Test\wwwroot\css\open-iconic\font\css\open-iconic-bootstrap.min.css
 wwwroot\css\bootstrap\bootstrap.min.css
 wwwroot\css\bootstrap\bootstrap.min.css.map
 wwwroot\css\open-iconic\font\css\open-iconic-bootstrap.min.css

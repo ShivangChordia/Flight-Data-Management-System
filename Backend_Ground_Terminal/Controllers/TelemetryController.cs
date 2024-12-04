@@ -9,7 +9,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Ground_Terminal_Management_System.Services;
-using SharedModels;
+using Backend_Ground_Terminal.Model;
 
 namespace Ground_Terminal_Management_System.Controllers
 {
@@ -43,6 +43,13 @@ namespace Ground_Terminal_Management_System.Controllers
         {
             try
             {
+
+                // If the query is 'check', return a simple response to indicate that the service is up
+                if (query?.ToLower() == "check")
+                {
+                    return Ok("I am on");
+                }
+
                 // Await the method to get the actual telemetry data list
                 var telemetryData = await _databaseService.SearchTelemetryDataAsync(query);
 

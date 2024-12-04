@@ -1,7 +1,73 @@
 ﻿@page "/"
+@inject NavigationManager navigationManager
+@inject IHttpClientFactory HttpClientFactory
+@using System.Net.Http.Json
 
-<h1>Hello, world!</h1>
+<PageTitle>FDMS - Ground Terminal</PageTitle>
 
-Welcome to your new app.
+<h1>Welcome to the Flight Data Management System</h1>
+<p>The Ground Terminal serves as your central hub for monitoring, analyzing, and managing flight data.</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<h2>Features</h2>
+<ul>
+    <li>Real-Time Telemetry Monitoring: View live aircraft data.</li>
+    <li>Historical Data Analysis: Retrieve and analyze stored flight records.</li>
+    <li>Interactive Visualizations: Graphs, charts, and dashboards for data representation.</li>
+    <li>Alerts and Notifications: Get notified of critical conditions in real time.</li>
+</ul>
+
+<h2>Quick Actions</h2>
+<p>
+    <button @onclick="NavigateToSearchTelemetry">Search Telemetry</button>
+    <button @onclick="NavigateToLiveTelemetry">Go to Live Telemetry</button>
+</p>
+
+<h2>System Status</h2>
+<p>Data Connection: <span>@connectionStatus</span></p>
+
+
+@code {
+    private string connectionStatus = "Checking...";
+
+    // Call this method when the page is first loaded
+    protected override async Task OnInitializedAsync()
+    {
+        await CheckBackendConnection();
+    }
+
+    // Check if the backend API is reachable
+    private async Task CheckBackendConnection()
+    {
+        try
+        {
+            var client = HttpClientFactory.CreateClient("BackendAPI");  // Use the backend API client
+
+            // Make sure the endpoint is appended correctly to the base address.
+            var response = await client.GetAsync("api/telemetryController/search?query=check");
+
+            if (response.IsSuccessStatusCode)
+            {
+                connectionStatus = "Connected";
+            }
+            else
+            {
+                connectionStatus = "Disconnected";
+            }
+        }
+        catch (Exception)
+        {
+            connectionStatus = "Disconnected";
+        }
+    }
+
+    private void NavigateToLiveTelemetry()
+    {
+        navigationManager.NavigateTo("/telemetry-dashboard");
+    }
+
+    private void NavigateToSearchTelemetry()
+    {
+        navigationManager.NavigateTo("/fetchdata");
+       
+    }
+}

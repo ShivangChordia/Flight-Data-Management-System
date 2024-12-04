@@ -10,9 +10,9 @@
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
-using SharedModels;
-using Backend_Ground_Terminal;
 using Microsoft.AspNetCore.SignalR;
+using Backend_Ground_Terminal.Model;
+using Backend_Ground_Terminal.Hubs;
 
 namespace Ground_Terminal_Management_System.Services
 {
